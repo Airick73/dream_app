@@ -10,7 +10,7 @@ form.addEventListener('submit', async(e) => {
   //by default when submit is clicked the page is reloaded
   //calling preventDefault() prevents this 
   e.preventDefault();
-  
+
   //show spinner to show api call in progress
   showSpinner();
 
@@ -28,12 +28,20 @@ form.addEventListener('submit', async(e) => {
     }),
   });
 
-  //await response to be populated and store in image
-  const { image } = await response.json();
+  if(response.ok){
+    //await response to be populated and store in image
+    const { image } = await response.json();
 
-  //grabbing result id and replacing html when submit clicked
-  const result = document.querySelector("#result");
-  result.innerHTML = `<img src="${image}" width="512" \>`;
+    //grabbing result id and replacing html when submit clicked
+    const result = document.querySelector("#result");
+    result.innerHTML = `<img src="${image}" width="512" \>`;
+  }
+  else{
+    const err = await response.text();
+    alert(err);
+    console.error(err);
+  }
+
 
   hideSpinner();
 });
