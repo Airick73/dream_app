@@ -1,4 +1,4 @@
-//as server side code is handled in this file
+//all server side code is handled in this file
 
 //importing from .env file gives access environment variables
 import * as dotenv from 'dotenv';
@@ -18,6 +18,7 @@ const openai = new OpenAIApi(configuration);
 //importing express and middleware(cors)
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
 
 const app = express();
 app.use(cors());
@@ -49,3 +50,15 @@ app.post('/dream', async(req, res) => {
 //fire up the server by calling app listen followed by port 
 //second arg is a callback that is called when server is started
 app.listen(8080, () => console.log('Make art on http://localhost:8080/dream'));
+
+
+
+// import { fileURLToPath } from 'url';
+// import { dirname } from 'path';
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
+
+// app.get('/dream', function(req, res) {
+//     res.sendFile(path.join(__dirname, '/index.html'));
+// });
